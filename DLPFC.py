@@ -114,7 +114,7 @@ def train():
 if __name__ == "__main__":
     parse = argparse.ArgumentParser()
     os.environ["CUDA_VISIBLE_DEVICES"] = "0"
-    datasets = ['151509']
+    datasets = ['151672']
     for i in range(len(datasets)):
         dataset = datasets[i]
         config_file = './config/DLPFC.ini'
@@ -194,11 +194,12 @@ if __name__ == "__main__":
         print('final epoch: ', epoch_max)
         print('ARI = {:.2f}'.format(ari_max))
 
-        title = 'Spatial-MGCN: ARI={:.2f}'.format(ari_max)
+        title = 'ConMGIN: ARI={:.2f}'.format(ari_max)
         adata.obs['idx'] = idx_max.astype(str)
         adata.obsm['emb'] = emb_max
         adata.obsm['mean'] = mean_max
 
         sc.pl.spatial(adata, img_key="hires", color=['idx'], title=title, show=False)
-        plt.savefig(savepath + 'Spatial_MGCN.jpg', bbox_inches='tight', dpi=600)
+        plt.savefig(savepath + 'ConMGIN.jpg', bbox_inches='tight', dpi=600)
         plt.show()
+
